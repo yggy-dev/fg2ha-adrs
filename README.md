@@ -84,11 +84,11 @@ Start here: **[MIGRATION-SUMMARY.md](./MIGRATION-SUMMARY.md)**
 - Business case and ROI
 - Timeline and resource requirements
 - Risk assessment
-- Key benefits (90% code reduction)
+- Key benefits (77% code reduction)
 
 ### For Architects
 Start here: **[docs/decisions/README.md](./docs/decisions/README.md)**
-- All 8 Architecture Decision Records
+- All 10 Architecture Decision Records
 - Decision dependencies
 - Architecture diagrams
 - Technical trade-offs
@@ -123,7 +123,7 @@ Start here: **[ARCHITECTURE-ANALYSIS.md](./ARCHITECTURE-ANALYSIS.md)**
 Replaces custom Node.js backend, Angular frontend, and device management with mature Home Assistant ecosystem.
 
 **Key Benefits**:
-- 90% reduction in backend/frontend code
+- 100% backend elimination, 94% frontend reduction
 - 100+ integrations available immediately
 - Free mobile app (iOS/Android)
 - Monthly security updates
@@ -149,16 +149,15 @@ Implement MQTT Discovery protocol for zero-configuration device registration.
 ---
 
 ### ADR-0003: ESPHome vs Arduino Firmware
-**Impact**: 🟡 Medium - Hybrid approach
+**Impact**: 🟡 Medium - Firmware strategy
 **Status**: Proposed
 
-Use ESPHome for simple devices (95% code reduction), keep Arduino for complex devices.
+Arduino firmware with MQTT Discovery for all existing devices; ESPHome optional for future devices only.
 
-**Device Strategy**:
-- ✅ Fan controllers → ESPHome
-- ✅ Light controllers → ESPHome
-- ✅ Smart sockets → ESPHome
-- ⚠️ Fridge controllers → Arduino (complex PID logic)
+**Migration Strategy**:
+- 🔧 All existing devices → Arduino + MQTT Discovery (OTA update)
+- ✅ No hardware replacement needed
+- 🔮 ESPHome available for future prototyping (optional)
 
 ---
 
@@ -244,21 +243,21 @@ Camera integration and AI-powered plant monitoring using Frigate and custom mode
 
 ### Phase 2: Backend Migration (8 weeks)
 - [ ] MQTT discovery for all device types
-- [ ] ESPHome migration (simple devices)
+- [ ] OTA firmware updates (add MQTT Discovery support)
 - [ ] Historical data migration
 - [ ] HA automations implementation
 - [ ] Local deployment configuration
 
 ### Phase 3: Frontend Migration (4 weeks)
 - [ ] Production Lovelace dashboards
-- [ ] Custom cards (claim codes, firmware mgmt)
+- [ ] Custom cards for firmware management
 - [ ] Mobile app configuration
 - [ ] User testing & iteration
 
 ### Phase 4: Production Rollout (4 weeks)
-- [ ] First tenant migration
+- [ ] First facility installation
 - [ ] Monitoring & validation
-- [ ] Gradual tenant rollout
+- [ ] Installation guide creation
 - [ ] Custom platform decommission
 
 **Total**: 22 weeks (5-6 months)
@@ -316,17 +315,17 @@ cat firmware/esphome-examples/README.md
 ### 3. For POC Development (1 week)
 ```bash
 # Set up full HA environment
-# Flash ESPHome to test device
-# Migrate one device type completely
+# Update firmware with MQTT Discovery
+# Test one device type completely
 # Document findings
 ```
 
 ## 📊 Success Criteria
 
 ### Technical Success
-- ✅ 90% code reduction achieved
+- ✅ 77% code reduction achieved (24,000 → 5,500 LOC)
 - ✅ Feature parity with current system
-- ✅ All devices successfully migrated
+- ✅ All devices successfully migrated via OTA
 - ✅ Data migration complete without loss
 - ✅ Automated testing in place
 
@@ -414,7 +413,7 @@ With this migration documentation, the Plantalytix team can:
 1. **Make Informed Decision** - Complete architectural analysis and trade-offs
 2. **Execute Migration** - Step-by-step guides and working examples
 3. **Reduce Risk** - Identified risks with mitigation strategies
-4. **Accelerate Development** - 90% less code to maintain
+4. **Accelerate Development** - 77% less code to maintain
 5. **Scale Effectively** - Flexible local deployment architecture
 6. **Leverage Ecosystem** - 2000+ HA integrations available
 
