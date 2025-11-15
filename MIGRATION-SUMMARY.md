@@ -55,10 +55,10 @@ Seven comprehensive Architecture Decision Records (ADRs) have been created follo
 **Risks**: Firmware complexity, topic migration
 
 ### [ADR-0003: ESPHome vs Arduino Firmware](docs/decisions/0003-esphome-vs-arduino-firmware.md)
-**Decision**: Hybrid approach - ESPHome for simple devices, Arduino for complex
-**Impact**: 95% code reduction for simple devices
-**Benefits**: Faster development, less maintenance, built-in HA integration
-**Risks**: Dual codebase maintenance, learning curve
+**Decision**: Arduino firmware with MQTT Discovery for all existing devices; ESPHome optional for future devices only
+**Impact**: No hardware replacement needed - firmware OTA update only
+**Benefits**: Protects existing investment, proven stability, no learning curve required
+**Risks**: None for migration (ESPHome available as future option)
 
 ### [ADR-0004: Data Storage Strategy](docs/decisions/0004-home-assistant-data-storage-strategy.md)
 **Decision**: PostgreSQL (14-day Recorder) + InfluxDB v2 (long-term time-series)
@@ -87,9 +87,10 @@ Seven comprehensive Architecture Decision Records (ADRs) have been created follo
 ## Key Benefits
 
 ### Code Reduction
-- **Backend**: ~10,000 LOC → ~1,000 LOC YAML (**90% reduction**)
-- **Frontend**: ~8,000 LOC → ~500 LOC YAML + custom cards (**90% reduction**)
-- **Firmware** (simple devices): ~2,000 LOC → ~100 LOC ESPHome YAML (**95% reduction**)
+- **Backend**: ~10,000 LOC → ~0 LOC (**100% reduction** - HA Core handles it)
+- **Frontend**: ~8,000 LOC → ~500 LOC YAML + custom cards (**94% reduction**)
+- **Firmware**: ~5,000 LOC → ~5,500 LOC (slight increase for MQTT Discovery)
+- **Total**: ~24,000 LOC → ~5,500 LOC (**77% overall reduction**)
 
 ### Cost Savings
 - **Mobile App**: Eliminate Ionic/Capacitor development (use HA Companion app)
@@ -122,21 +123,21 @@ Seven comprehensive Architecture Decision Records (ADRs) have been created follo
 
 ### Phase 2: Backend Migration (8 weeks)
 - Implement MQTT discovery for all device types
-- Migrate simple devices to ESPHome
+- OTA firmware updates to add MQTT Discovery support
 - Migrate historical data to new InfluxDB
 - Implement HA automations
-- Deploy multi-tenant architecture
+- Deploy local HA instance
 
 ### Phase 3: Frontend Migration (4 weeks)
 - Create production Lovelace dashboards
-- Develop custom cards (claim codes, firmware management)
+- Develop custom cards for firmware management
 - Configure mobile app
 - User testing and iteration
 
 ### Phase 4: Production Rollout (4 weeks)
-- Migrate first production tenant
+- Deploy first facility installation
 - Monitor and validate
-- Gradual rollout to remaining tenants
+- Create installation guide for additional facilities
 - Decommission custom platform
 
 **Total Timeline**: 22 weeks (5-6 months)
@@ -174,20 +175,21 @@ Seven comprehensive Architecture Decision Records (ADRs) have been created follo
 ## Success Metrics
 
 ### Technical Metrics
-- 90% reduction in backend code maintained
-- 90% reduction in frontend code maintained
-- 95% reduction in firmware code (ESPHome devices)
+- 77% reduction in total codebase (24,000 → 5,500 LOC)
+- 100% reduction in backend code maintained
+- 94% reduction in frontend code maintained
+- No hardware replacement needed (firmware OTA update only)
 - Zero mobile app development cost
 - Monthly security updates (instead of manual)
 - <2 second dashboard load time
-- 99.9% uptime for HA instances
+- 99.9% uptime for local HA instances
 
 ### Business Metrics
 - 50% reduction in development time for new features
 - 75% reduction in developer onboarding time
 - 100+ new integrations available immediately
 - Positive user feedback on new UI/UX
-- Successful migration of all tenants
+- Successful migration of all facilities
 
 ### User Metrics
 - Feature parity with current system

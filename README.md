@@ -18,14 +18,25 @@
 
 ## 📋 Overview
 
-This repository contains a **comprehensive architectural migration plan** for refactoring Plantalytix from a custom IoT platform to Home Assistant. The migration reduces codebase by 77%, eliminates cloud infrastructure costs, and provides a local-first deployment model.
+This repository contains a **comprehensive architectural migration plan** for refactoring Plantalytix from a custom IoT platform to **Home Assistant**. The migration reduces codebase by 77%, eliminates cloud infrastructure costs, and provides a **local-first, single-user deployment** model.
 
-**Key Highlights:**
+### Key Highlights
+
 - 📝 **10 Architecture Decision Records** following MADR format
 - 🏗️ **Complete migration roadmap** with 4 phases over 22 weeks
 - 🔧 **Working examples** including MQTT Discovery and ESPHome configs
 - 📊 **Mermaid diagrams** for visual architecture representation
 - ✅ **77% code reduction** from backend/frontend elimination
+- 🏠 **Local deployment** on Raspberry Pi or local server (no cloud required)
+- 🔒 **Complete privacy** - all data stays on local network
+
+### Important Clarifications
+
+- **Hardware:** All existing ESP32 devices stay the same - NO hardware replacement needed
+- **Firmware:** OTA (over-the-air) update adds MQTT Discovery support to existing Arduino firmware
+- **ESPHome:** Optional for future devices only, NOT required for migration
+- **Deployment:** Single Home Assistant instance per facility on local network
+- **No Cloud:** No internet dependencies, works completely offline
 
 **Status:** ✅ Complete Documentation Package | **Created:** 2025-11-15 | **Version:** 1.0
 
@@ -35,16 +46,19 @@ This repository contains a **comprehensive architectural migration plan** for re
 
 ```
 plantalytix/
-├── ARCHITECTURE-ANALYSIS.md              # Deep analysis of current system
+├── README.md                             # This file - Start here!
+├── ARCHITECTURE-ANALYSIS.md              # Deep dive into current system
 ├── MIGRATION-SUMMARY.md                  # Executive summary & roadmap
-├── README.md                             # This file
+├── CONTRIBUTING.md                       # How to contribute to docs
 │
 ├── docs/
-│   ├── GETTING-STARTED-HA.md            # Practical HA setup guide
-│   ├── FIRMWARE-UPDATE-ARCHITECTURE.md  # Firmware update system
+│   ├── README.md                         # Documentation navigation guide
+│   ├── GETTING-STARTED-HA.md            # Hands-on Home Assistant setup (5-min quickstart)
+│   ├── ARCHITECTURE-DIAGRAM.mmd          # Mermaid diagrams (8+ diagrams)
+│   ├── FIRMWARE-UPDATE-ARCHITECTURE.md  # OTA firmware update system
 │   │
-│   └── decisions/                        # Architecture Decision Records
-│       ├── README.md                     # ADR index and overview
+│   └── decisions/                        # Architecture Decision Records (ADRs)
+│       ├── README.md                     # ADR index with decision flow
 │       ├── 0001-migrate-to-home-assistant-platform.md
 │       ├── 0002-use-mqtt-discovery-for-device-integration.md
 │       ├── 0003-esphome-vs-arduino-firmware.md
@@ -56,7 +70,7 @@ plantalytix/
 │       ├── 0009-firmware-update-management-system.md
 │       └── 0010-fridge-cam-plant-monitoring.md
 │
-└── firmware/esphome-examples/            # Working ESPHome configs
+└── firmware/esphome-examples/            # Working ESPHome configs (optional reference)
     ├── README.md                         # ESPHome guide
     ├── fan-controller.yaml               # Fan controller example
     ├── light-controller.yaml             # Light controller example
@@ -174,7 +188,12 @@ Critical control in firmware (PID, safety), non-critical in HA (scheduling, noti
 
 Single HA instance per growing facility on local network (Raspberry Pi or local server).
 
-**Deployment**: Local-first architecture, no cloud dependencies, complete privacy.
+**Key Points**:
+- Local-first architecture, no cloud dependencies
+- Complete privacy - all data stays on local network
+- Simple deployment: `docker-compose up` or Home Assistant OS on Raspberry Pi
+- No multi-tenancy complexity
+- Works completely offline
 
 ---
 
@@ -195,6 +214,22 @@ Replace Angular with Lovelace dashboards using ApexCharts and custom cards.
 Detailed C++ implementation guide for adding MQTT Discovery to Arduino firmware.
 
 **Includes**: Working code examples, test procedures, debugging tips.
+
+---
+
+### ADR-0009: Firmware Update Management System
+**Impact**: 🔴 High - OTA update architecture
+**Status**: Proposed
+
+Multi-source firmware management with OTA updates via Home Assistant UI.
+
+---
+
+### ADR-0010: Fridge Cam & Plant Monitoring
+**Impact**: 🔴 High - AI/Camera integration
+**Status**: Proposed
+
+Camera integration and AI-powered plant monitoring using Frigate and custom models.
 
 ---
 
@@ -232,15 +267,27 @@ Detailed C++ implementation guide for adding MQTT Discovery to Arduino firmware.
 
 | Metric | Current | Proposed | Change |
 |--------|---------|----------|--------|
-| **Backend LOC** | ~10,000 | ~1,000 | -90% |
+| **Backend LOC** | ~10,000 | ~0 | -100% |
 | **Frontend LOC** | ~8,000 | ~500 | -94% |
-| **Firmware LOC (simple)** | ~2,000 | ~100 | -95% |
-| **Services** | 5 | 3* | -40% |
-| **Mobile App Cost** | Ongoing | $0 | -100% |
+| **Firmware LOC** | ~5,000 | ~5,500 | +10% |
+| **Total LOC** | ~24,000 | ~5,500 | **-77%** |
+| **Services** | 5 | 3 | -40% |
+| **Mobile App Cost** | Custom dev | $0 | -100% |
 | **Security Updates** | Manual | Monthly | Auto |
 | **Developer Onboarding** | 2-3 months | 2-3 weeks | -75% |
+| **Hardware Changes** | N/A | None | No replacement needed |
 
-*Shared multi-tenant services
+## 📊 Viewing Architecture Diagrams
+
+The repository includes comprehensive Mermaid diagrams in [docs/ARCHITECTURE-DIAGRAM.mmd](./docs/ARCHITECTURE-DIAGRAM.mmd).
+
+### On GitHub
+Mermaid diagrams render automatically when viewing `.mmd` files or markdown files on GitHub.
+
+### Locally
+- **VS Code**: Install [Markdown Preview Mermaid Support](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid)
+- **Web**: Visit [mermaid.live](https://mermaid.live/) and paste diagram code
+- **CLI**: `npm install -g @mermaid-js/mermaid-cli && mmdc -i docs/ARCHITECTURE-DIAGRAM.mmd -o architecture.png`
 
 ## 🎓 Getting Started
 
@@ -345,13 +392,20 @@ cat firmware/esphome-examples/README.md
 
 ## 📝 Document Changelog
 
-### 2025-11-15 (Initial Release)
-- Created 8 comprehensive ADRs
-- Architecture analysis document
-- Migration summary and roadmap
-- Getting started guide
-- ESPHome working examples
-- 7,000+ lines of documentation
+### 2025-11-15 (v1.0 - Initial Release)
+- Created 10 comprehensive ADRs following MADR format
+- Complete architecture analysis document
+- Executive migration summary and roadmap
+- Hands-on getting started guide
+- Working ESPHome examples for reference
+- Mermaid architecture diagrams (8+ diagrams)
+- 7,000+ lines of comprehensive documentation
+
+### Key Clarifications Made
+- **Hardware**: No device replacement needed - firmware OTA update only
+- **Deployment**: Single-user local installation (not multi-tenant cloud)
+- **ESPHome**: Optional for future devices, not required for migration
+- **Code metrics**: Corrected to reflect 77% reduction (24,000 → 5,500 LOC)
 
 ## 🎉 What This Enables
 
