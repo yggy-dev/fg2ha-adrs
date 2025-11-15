@@ -1,0 +1,31 @@
+matrix:
+  - name: Markdown
+    aspell:
+      lang: en
+    dictionary:
+      encoding: utf-8
+    pipeline:
+      - pyspelling.filters.markdown:
+          markdown_extensions:
+            - markdown.extensions.extra:
+      - pyspelling.filters.html:
+          comments: false
+          ignores:
+            - code
+            - pre
+    sources:
+      - '**/*.md'
+    default_encoding: utf-8
+
+  - name: Mermaid
+    aspell:
+      lang: en
+    pipeline:
+      - pyspelling.filters.text:
+    sources:
+      - '**/*.mmd'
+    default_encoding: utf-8
+
+# Custom dictionary for project-specific terms
+wordlists:
+  - .wordlist.txt

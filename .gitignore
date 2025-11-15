@@ -1,0 +1,64 @@
+# Claude Code
+.claude
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.cache
+
+# Build artifacts (if any)
+dist/
+build/
+*.pyc
+__pycache__/
+node_modules/
+
+# Documentation build outputs
+docs/_build/
+docs/.doctrees/
+*.pdf
+*.epub
+
+# Mermaid CLI outputs (if generated)
+*.mmd.png
+*.mmd.svg
+*.mmd.pdf
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z

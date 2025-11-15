@@ -1,0 +1,40 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Markdown files
+*.md text eol=lf linguist-detectable=true linguist-documentation=true
+
+# Mermaid diagrams
+*.mmd text eol=lf linguist-language=Mermaid linguist-detectable=true
+
+# YAML files
+*.yaml text eol=lf linguist-detectable=true
+*.yml text eol=lf linguist-detectable=true
+
+# Configuration files
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# Archives
+*.zip binary
+*.tar binary
+*.gz binary
+
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg text
+
+# Firmware binaries
+*.bin binary
+*.hex binary
+*.elf binary
+
+# Documentation files are linguist-documentation
+docs/** linguist-documentation=true
+*.md linguist-documentation=false
+README.md linguist-documentation=false
+CONTRIBUTING.md linguist-documentation=false
