@@ -20,6 +20,9 @@
 
 This repository contains a **comprehensive architectural migration plan** for refactoring Plantalytix from a custom IoT platform to **Home Assistant**. The migration reduces codebase by 77%, eliminates cloud infrastructure costs, and provides a **local-first, single-user deployment** model.
 
+Simulated prototype without real devices:
+![simulation](docs/fg2ha-simulation-no-real-device.png "Simulation")
+
 ### Key Highlights
 
 - 📝 **10 Architecture Decision Records** following MADR format
