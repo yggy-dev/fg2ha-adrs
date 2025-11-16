@@ -54,68 +54,26 @@ plantalytix/
 ├── MIGRATION-SUMMARY.md                  # Executive summary & roadmap
 ├── CONTRIBUTING.md                       # How to contribute to docs
 │
-├── docs/
-│   ├── README.md                         # Documentation navigation guide
-│   ├── GETTING-STARTED-HA.md            # Hands-on Home Assistant setup (5-min quickstart)
-│   ├── ARCHITECTURE-DIAGRAM.mmd          # Mermaid diagrams (8+ diagrams)
-│   ├── FIRMWARE-UPDATE-ARCHITECTURE.md  # OTA firmware update system
-│   │
-│   └── decisions/                        # Architecture Decision Records (ADRs)
-│       ├── README.md                     # ADR index with decision flow
-│       ├── 0001-migrate-to-home-assistant-platform.md
-│       ├── 0002-use-mqtt-discovery-for-device-integration.md
-│       ├── 0003-esphome-vs-arduino-firmware.md
-│       ├── 0004-home-assistant-data-storage-strategy.md
-│       ├── 0005-home-assistant-automation-and-control-logic.md
-│       ├── 0006-home-assistant-single-user-deployment.md
-│       ├── 0007-home-assistant-ui-and-dashboards.md
-│       ├── 0008-firmware-mqtt-discovery-implementation.md
-│       ├── 0009-firmware-update-management-system.md
-│       └── 0010-fridge-cam-plant-monitoring.md
-│
-└── firmware/esphome-examples/            # Working ESPHome configs (optional reference)
-    ├── README.md                         # ESPHome guide
-    ├── fan-controller.yaml               # Fan controller example
-    ├── light-controller.yaml             # Light controller example
-    └── secrets.yaml.template             # Configuration template
+└── docs/
+    ├── README.md                         # Documentation navigation guide
+    ├── GETTING-STARTED-HA.md            # Hands-on Home Assistant setup (5-min quickstart)
+    ├── ARCHITECTURE-DIAGRAM.mmd          # Mermaid diagrams (8+ diagrams)
+    ├── FIRMWARE-UPDATE-ARCHITECTURE.md  # OTA firmware update system
+    │
+    └── decisions/                        # Architecture Decision Records (ADRs)
+        ├── README.md                     # ADR index with decision flow
+        ├── 0001-migrate-to-home-assistant-platform.md
+        ├── 0002-use-mqtt-discovery-for-device-integration.md
+        ├── 0003-esphome-vs-arduino-firmware.md
+        ├── 0004-home-assistant-data-storage-strategy.md
+        ├── 0005-home-assistant-automation-and-control-logic.md
+        ├── 0006-home-assistant-single-user-deployment.md
+        ├── 0007-home-assistant-ui-and-dashboards.md
+        ├── 0008-firmware-mqtt-discovery-implementation.md
+        ├── 0009-firmware-update-management-system.md
+        └── 0010-fridge-cam-plant-monitoring.md
+
 ```
-
-## 🎯 Quick Navigation
-
-### For Executives / Decision Makers
-Start here: **[MIGRATION-SUMMARY.md](./MIGRATION-SUMMARY.md)**
-- Business case and ROI
-- Timeline and resource requirements
-- Risk assessment
-- Key benefits (77% code reduction)
-
-### For Architects
-Start here: **[docs/decisions/README.md](./docs/decisions/README.md)**
-- All 10 Architecture Decision Records
-- Decision dependencies
-- Architecture diagrams
-- Technical trade-offs
-
-### For Developers
-Start here: **[docs/GETTING-STARTED-HA.md](./docs/GETTING-STARTED-HA.md)**
-- 5-minute quickstart
-- Hands-on Home Assistant setup
-- MQTT Discovery testing
-- First dashboard creation
-
-### For Firmware Engineers
-Start here: **[firmware/esphome-examples/README.md](./firmware/esphome-examples/README.md)**
-- ESPHome vs Arduino comparison
-- Working configuration examples
-- Migration guide
-- Pin mappings and hardware setup
-
-### For Product Managers
-Start here: **[ARCHITECTURE-ANALYSIS.md](./ARCHITECTURE-ANALYSIS.md)**
-- Current system deep-dive
-- Recommended ADRs
-- Feature parity analysis
-- Technology stack details
 
 ## 📖 ADR Summary
 
@@ -234,6 +192,43 @@ Multi-source firmware management with OTA updates via Home Assistant UI.
 Camera integration and AI-powered plant monitoring using Frigate and custom models.
 
 ---
+
+## 🎯 Quick Navigation
+
+### For Executives / Decision Makers
+Start here: **[MIGRATION-SUMMARY.md](./MIGRATION-SUMMARY.md)**
+- Business case and ROI
+- Timeline and resource requirements
+- Risk assessment
+- Key benefits (77% code reduction)
+
+### For Architects
+Start here: **[docs/decisions/README.md](./docs/decisions/README.md)**
+- All 10 Architecture Decision Records
+- Decision dependencies
+- Architecture diagrams
+- Technical trade-offs
+
+### For Developers
+Start here: **[docs/GETTING-STARTED-HA.md](./docs/GETTING-STARTED-HA.md)**
+- 5-minute quickstart
+- Hands-on Home Assistant setup
+- MQTT Discovery testing
+- First dashboard creation
+
+### For Firmware Engineers
+Start here: **[firmware/esphome-examples/README.md](./firmware/esphome-examples/README.md)**
+- ESPHome vs Arduino comparison
+- Working configuration examples
+- Migration guide
+- Pin mappings and hardware setup
+
+### For Product Managers
+Start here: **[ARCHITECTURE-ANALYSIS.md](./ARCHITECTURE-ANALYSIS.md)**
+- Current system deep-dive
+- Recommended ADRs
+- Feature parity analysis
+- Technology stack details
 
 ## 🚀 Implementation Roadmap
 
